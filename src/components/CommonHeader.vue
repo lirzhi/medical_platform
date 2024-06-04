@@ -4,10 +4,14 @@
             <img src="favicon.png" style="height: 50px; margin-right: 10px;" />
             <div style="font-size: 25px; line-height: 200%;">医学临床数据交换系统</div>
         </div>
-        <div class="r-content" v-show="path !== '/Login'">
-            <el-dropdown trigger="click" size="mini"  style="display: flex; align-items: center;">
+        <div class="r-content" v-show="path !== '/Login'" style="display: flex; align-items: center;">
+            <el-badge :value="unreadMessages" class="item">
+                <i class="el-icon-bell" style="font-size: 25px; margin-right: 5px;"></i>
+            </el-badge>
+            <div style="width: 20px;"></div>
+            <el-dropdown trigger="click" size="mini" style="display: flex; align-items: center;">
                 <el-avatar :size="50" src="userImg.png"></el-avatar>
-                <el-dropdown-menu>
+                <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="logOut">登出</el-dropdown-item>
                     <el-dropdown-item @click.native="modifyPassword">修改密码</el-dropdown-item>
                 </el-dropdown-menu>
@@ -16,7 +20,7 @@
 
         <el-dialog title="修改密码" :visible.sync="modifyPasswordDialogVisible" width="50%"
             :before-close="modifyPasswordCancel">
-            <el-form :model="passwordForm" label-width="auto" >
+            <el-form :model="passwordForm" label-width="auto">
                 <el-form-item prop="newPassword" label="新密码">
                     <el-input v-model="passwordForm.newPassword" type="password"></el-input>
                 </el-form-item>
@@ -43,6 +47,7 @@ export default {
                 confirmPassword: ''
             },
             modifyPasswordDialogVisible: false,
+            unreadMessages: 5, // 假设有5条未读消息
         }  
     },
     props: {
@@ -97,4 +102,11 @@ export default {
 </script>
 
 <style scoped>
+.r-content .item {
+    display: flex;
+    align-items: center;
+}
+.el-icon-bell {
+    cursor: pointer;
+}
 </style>

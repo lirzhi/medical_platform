@@ -4,10 +4,6 @@
         <div>
             <el-form :model="form" status-icon :rules="rules" ref="form" label-width="100px" class="login-container">
                 <h3 style="text-align: center;">系统登录</h3>
-                <!-- <el-tabs v-model="loginType" style="margin-bottom: 15px; display: flex; justify-content: center;">
-                    <el-tab-pane label="普通用户" name="user"></el-tab-pane>
-                    <el-tab-pane label="管理员" name="admin"></el-tab-pane>
-                </el-tabs> -->
                 <el-form-item label="用户名" label-width="80px" prop="username" class="username">
                     <el-input type="input" v-model="form.username" auto-complete="off" placeholder="请输入账号"></el-input>
                 </el-form-item>
@@ -26,7 +22,7 @@
 </template>
 
 <script>
-import { login } from "@/api/data";
+import { loginRequest } from "@/api/data";
 export default {
     name: "login",
     data() {
@@ -47,7 +43,6 @@ export default {
                     { required: true, message: "请输入密码", trigger: "blur" },
                 ],
             },
-            // loginType: "user",
         };
     },
     created() {
@@ -69,15 +64,10 @@ export default {
             let params = {
                 username: this.form.username,
                 password: this.form.password,
-                // loginType: this.loginType,
             };
 
-            login('/login', params, _this, function (res) {
-                if (res.code === 200) {
-                    _this.$router.push({ path: "/MainPage" });
-                } else {
-                    _this.$message.error(res.msg);
-                }
+            loginRequest('/admin/login', params, _this, function (res) {
+                _this.$router.push({ path: "/MainPage" });
             });
         },
     },

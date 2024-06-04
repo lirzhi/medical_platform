@@ -46,85 +46,46 @@ const routes = [
                 component: () => import('@/views/Login')
             },
             {
-                path: '/NetworkingGroup',
-                name: 'NetworkingGroup',
+                path: '/InstitutionList',
+                name: 'InstitutionList',
                 meta: {
-                    title: '组网组管理'
+                    title: '现有机构'
                 },
-                component: () => import('@/views/NetworkingGroup')
+                component: () => import('@/views/InstitutionList')
             },
             {
-                path: '/InstitutionNetworking',
-                name: 'InstitutionNetworking',
+                path: '/InsApproval',
+                name: 'InsApproval',
                 meta: {
-                    title: '机构组网管理'
+                    title: '机构组网审批'
                 },
-                component: () => import('@/views/InstitutionNetworking')
+                component: () => import('@/views/InsApproval')
             },
             {
-                path: '/LeadingProjects',
-                name: 'LeadingProjects',
+                path: '/ProjectList',
+                name: 'ProjectList',
                 meta: {
-                    title: '本机构主持项目'
+                    title: '现有项目'
                 },
-                component: () => import('@/views/LeadingProjects')
+                component: () => import('@/views/ProjectList')
             },
             {
-                path: '/ParticipatingProjects',
-                name: 'ParticipatingProjects',
+                path: '/ProApproval',
+                name: 'ProApproval',
                 meta: {
-                    title: '本机构参与项目'
+                    title: '建项申请审批'
                 },
-                component: () => import('@/views/ParticipatingProjects')
+                component: () => import('@/views/ProApproval')
             },
             {
-                path: '/AccountManage',
-                name: 'AccountManage',
+                path: '/ProModificationApproval',
+                name: 'ProModificationApproval',
                 meta: {
-                    title: '账号管理'
+                    title: '项目修改审批'
                 },
-                component: () => import('@/views/AccountManage')
+                component: () => import('@/views/ProModificationApproval')
             },
-            {
-                path: '/RelationshipSystem',
-                name: 'RelationshipSystem',
-                meta: {
-                    title: '关系系统'
-                },
-                component: () => import('@/views/RelationshipSystem')
-            },
-            {
-                path: '/DigitalObjectApply',
-                name: 'DigitalObjectApply',
-                meta: {
-                    title: '数字对象申请'
-                },
-                component: () => import('@/views/DigitalObjectApply')
-            },
-            {
-                path: '/DigitalObjectApproval',
-                name: 'DigitalObjectApproval',
-                meta: {
-                    title: '数字对象审批'
-                },
-                component: () => import('@/views/DigitalObjectApproval')
-            },
-            {
-                path: '/DigitalObjectSearch',
-                name: 'DigitalObjectSearch',
-                meta: {
-                    title: '数字对象检索'
-                },
-                component: () => import('@/views/DigitalObjectSearch')
-            },
-            {
-                path: '/DigitalObjectFerry',
-                name: 'DigitalObjectFerry',
-                meta: {
-                    title: '数字对象摆渡'
-                },
-                component: () => import('@/views/DigitalObjectFerry')
-            },
+            
         ]
     },
 ]
