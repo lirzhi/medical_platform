@@ -152,11 +152,12 @@ export const loginRequest = (requestUrl, params, This, callback) => {
                 store.commit('setUsername', params.username)
                 store.commit('setUserType', 'admin')
                 callback({code: 200, msg: '登录成功'})
+                // this.$message.success("登录成功")
             callback(res) 
         }
         else {
             This.$message({
-                message: res.error,
+                message: "用户名或密码输入有误，请重新输入",
                 type: 'error'
             });
         }

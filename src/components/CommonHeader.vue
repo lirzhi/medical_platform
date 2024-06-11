@@ -37,11 +37,14 @@
 </template>
 
 <script>
+import { postForm } from '@/api/data';
+
 export default {
     name: "CommonAside",
     data() {
         return {
             path: '',
+            username:'',
             passwordForm: {
                 newPassword: '',
                 confirmPassword: ''
@@ -55,6 +58,7 @@ export default {
     },
     mounted() {
         this.path = this.$router.currentRoute.path;
+        this.username = this.$store.state.user.username;
     },
     watch: {
         $route(to, from) {
@@ -63,11 +67,19 @@ export default {
     },
     methods: {
         logOut() {
-            this.$store.commit('clearToken');
-            this.$store.commit('clearUsername');
-            this.$store.commit('clearUserType');
-            // this.$router.push('/Login');
-            window.location.reload();
+            this.$confirm('是否确认退出本系统?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                postForm('/admin/logout',{},{},this,res=>{
+                    this.$store.commit('clearToken');
+                    this.$store.commit('clearUsername');
+                    this.$store.commit('clearUserType');
+                    // this.$router.push('/Login');
+                    window.location.reload();
+                })
+            }).catch(() => { });
         },
         modifyPassword() {
             this.modifyPasswordDialogVisible = true;
@@ -92,10 +104,25 @@ export default {
                 this.$message.error('两次密码不一致');
                 return;
             }
-            this.$message.success('修改成功');
-            this.modifyPasswordDialogVisible = false;
-            this.passwordForm.newPassword = '';
-            this.passwordForm.confirmPassword = '';
+
+            this.$confirm('是否确定继续修改密码?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                let params={
+                    username:this.username,
+                    password:this.passwordForm.newPassword
+                }
+                postForm('/admin/changePassword',params,{},this,res=>{
+                    console.log("修改成功",res);
+                    this.$message.success('修改成功');
+                    this.logOut();
+                    this.$message.success('登录信息已过期,请重新登录');
+                    this.modifyPasswordDialogVisible = false;
+
+                })
+            }).catch(() => { });
         }
     },
 }

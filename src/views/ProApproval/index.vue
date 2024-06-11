@@ -25,6 +25,25 @@
                     <el-input v-model="searchForm.description" style="width: 200px;"></el-input>
                 </el-form-item>
 
+                <el-form-item prop="createTimeRange" label="创建日期" class="SearchFormItem">
+                    <el-date-picker
+                        v-model="searchForm.createTimeRange"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                    </el-date-picker>          
+                </el-form-item>
+                <el-form-item prop="updateTimeRange" label="最近修改日期" class="SearchFormItem">
+                    <el-date-picker
+                        v-model="searchForm.updateTimeRange"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                    </el-date-picker>          
+                </el-form-item>
+
                 <!-- <el-form-item label="申请时间" class="SearchFormTimePicker">
                     <el-date-picker
                         v-model="searchForm.applyTimeRange"
@@ -107,7 +126,9 @@ export default {
                 involvedInstitutionDoi:"",
                 doi:"",
                 description:"",
-                status:""
+                status:"",
+                createTimeRange:[],
+                updateTimeRange:[]
             },
             approvalStatus:[
                 "待审批",
@@ -115,19 +136,33 @@ export default {
                 "未通过"
             ],
 
+            // approvalTable: [{
+            //     id: 1,
+            //     projectDoi: "doi",
+            //     projectName: "project1",
+            //     institutionDoi: "doi1",
+            //     involvedInstitutionDoi: "doi2,doi3",
+            //     allInsDoi: "",
+            //     description: "",
+            //     approvalStatus:"待审批",
+            //     contactInfo:"111111",
+            //     contactEmail:"112@qq.com",
+            //     createTime:"2024-05-24",
+            //     updateTime:"2024-05-28"
+            // }],
             approvalTable: [{
                 id: 1,
-                projectDoi: "doi",
-                projectName: "project1",
-                institutionDoi: "doi1",
-                involvedInstitutionDoi: "doi2,doi3",
+                projectDoi: "",
+                projectName: "",
+                institutionDoi: "",
+                involvedInstitutionDoi: "",
                 allInsDoi: "",
                 description: "",
-                approvalStatus:"待审批",
-                contactInfo:"111111",
-                contactEmail:"112@qq.com",
-                createTime:"2024-05-24",
-                updateTime:"2024-05-28"
+                approvalStatus:"",
+                contactInfo:"",
+                contactEmail:"",
+                createTime:"",
+                updateTime:""
             }],
             total:1,
             pageSize:10,

@@ -25,6 +25,25 @@
                     <el-input v-model="searchForm.description" style="width: 200px;"></el-input>
                 </el-form-item>
 
+                <el-form-item prop="createTimeRange" label="创建日期" class="SearchFormItem">
+                    <el-date-picker
+                        v-model="searchForm.createTimeRange"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                    </el-date-picker>          
+                </el-form-item>
+                <el-form-item prop="updateTimeRange" label="最近修改日期" class="SearchFormItem">
+                    <el-date-picker
+                        v-model="searchForm.updateTimeRange"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                    </el-date-picker>          
+                </el-form-item>
+
             </el-form>
 
             <el-button type="primary" @click="searchProject">搜索</el-button>
@@ -81,6 +100,8 @@ export default {
                 involvedInstitutionDoi:"",
                 doi:"",
                 description:"",
+                createTimeRange:[],
+                updateTimeRange:[]
             },
 
             // 项目列表
@@ -129,7 +150,11 @@ export default {
                 institutionDoi: this.searchForm.institutionDoi,
                 involvedInstitutionDoi: this.searchForm.involvedInstitutionDoi,
                 name: this.searchForm.name,
-                description: this.searchForm.description
+                description: this.searchForm.description,
+                createTimeStart:this.searchForm.createTimeRange[0],
+                createTimeEnd:this.searchForm.createTimeRange[1],
+                updateTimeStart:this.searchForm.updateTimeRange[0],
+                updateTimeEnd:this.searchForm.updateTimeRange[1]
             };
 
             postForm('/project/proList/list', params,{}, this, res =>{
